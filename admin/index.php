@@ -1,7 +1,12 @@
+ <?php 
+ session_start();
+ if(isset($_SESSION['email'])){
+ 	header('location: dashboard.php');
+ } else{ ?>
  <html>
  <head>
  	<title>Online Examination</title>
- 	<link rel="stylesheet" href="css/login.css">
+ 	<link rel="stylesheet" href="css/index.css">
  </head>
  <body>
  	<div class="heading">
@@ -40,5 +45,6 @@
  </body>
  </html>
  <?php
+}
  	include 'footer.php';
  ?>

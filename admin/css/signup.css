@@ -1,83 +1,7 @@
 *{
 	margin:0;
 	padding:0;
-}
-
-.container{
-	margin: 50px 0;
-}
-
-.main{
-	display:flex;
-	flex-direction: column;
-	justify-content: space-around;
-	flex-wrap: nowrap;
-	margin: 0 auto;
-	width:800px;
-	min-height: 300px;
-	/*border:1px solid red; */
-	box-shadow: 0 2px 4px gray;
-	border-radius: 10px;
-	padding:30px;
-}
-
-.heading{
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	/*align-self: flex-start;*/
-	font-weight:bold;
-	font-size: 1.5em;
-	margin-bottom: auto;
-}
-.student p {	
-	align-self: center;
-	text-decoration: underline;
-}
-.add-student{
-	text-decoration:none !none;
-	color:#fff;
-	background: yellowgreen;
-	font-size: 15px;
-	padding: 10px 5px;
-	border-radius: 5px;		
-}
-
-.student-main{
-	/*border: 1px solid red;*/
-	display:flex;
-	justify-content:center;
-	margin-bottom: auto;
-}
-
-#student-table{
-	border-collapse: collapse;
-}
-
-#student-table td, #student-table th{
-	padding: 5px;
-	border:1px solid gray;
-	text-align: center;
-}
-
-#student-table tr:nth-child(even){
-	background: #ddd;
-}
-#student-table tr td:nth-child(5){
-	/*text-align:center;*/
-}
-.error-panel{
-	margin:10px auto;
-	width: 90%;
-	background:#ffe3a3;
-	color: #d8750f;
-	border:2px solid #fdaeae;	
-	border-radius: 5px;
-}
-.error{
-	text-align:center;
-	padding: 5px 0px;
-	font-size:20px;
+	font-family: arial;
 }
 
 #formm{
@@ -149,7 +73,7 @@
 	outline: none;
 }*/
 .gender-panel ,.active-panel{
-	/*position:relative;*/
+	position:relative;
 	height: 60px;
 	/*border: 1px solid gray;*/
 }
