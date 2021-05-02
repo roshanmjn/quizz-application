@@ -8,7 +8,7 @@
 </head>
 <body>
 	<?php 
-		$sql = "SELECT * FROM question order by rand() limit 10";
+		$sql = "SELECT * FROM question order by rand() limit 2";
 		$result = mysqli_query($conn, $sql);
 		
 	 ?>
