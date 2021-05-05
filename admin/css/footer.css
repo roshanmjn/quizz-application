@@ -4,19 +4,18 @@
 }
 
 .footer{
-	position: fixed;
-	bottom:0;
-	bottom: 0;
+	margin-top:auto;
 	width: 100%;
-	height:50px;
-	/*border: 1px solid red;*/
+	height:5rem;
+	/*border: 1rem solid red;*/
 	background: linear-gradient(to right,#eef2f3,#8e9eab);	
-	box-shadow: 0 2px 4px gray;	
-	margin:0 auto;
+	box-shadow: 0 .2rem .4rem gray;	
 }
 .footer p{
 	font-family: arial, helvetica, sans-serif;
-	font-size: 18px;
-	padding: 15px 0 0 10px;
+	font-size: 1.8rem;
+	text-align: center
 	color: #6d6a6a;
+	line-height: 5rem;
+	text-align: center;
 }

@@ -44,10 +44,8 @@ if(isset($_POST['submit'])){
 $sql = "SELECT * FROM faculty where faculty_id='$update_id'";
 
 ?>
-<html>
-<style>
-	 <?php include('css/faculty.css'); ?>
-</style>
+<!--STYLE SHEET ALREADY LINKED WITH THE HEADER FILE, SO NO NEED TO LINK WITH UPDATE_FACULTY.PHP -->
+
 <div id="formm">
 	<div id="form-main">
 		<div class="form-heading">
@@ -104,7 +102,7 @@ $sql = "SELECT * FROM faculty where faculty_id='$update_id'";
 		</div>
 	</div>
 </div>
-</html>
-	<?php 
 
-	 ?>
+<?php 
+	include 'footer.php';
+ ?>

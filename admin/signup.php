@@ -1,51 +1,113 @@
 <?php 
 session_start();
 
+//SEND TO DASHBOARD IF SESSION ALREADY EXISTS
 if(isset($_SESSION['email'])){
 	header("location: dashboard.php");
-	exit();
 }
-elseif(!isset($_SESSION['email'])){
 
- ?>
+//TO VALIADTE A NEW FORM
+$firstname = $lastname = $email = $username = $password = $gender = $faculty = '';
+
+if(isset($_POST['submit'])){
+	
+	include_once('includes/db.inc.php');
+
+	$firstname = mysqli_real_escape_string($conn,$_POST["firstname"]);
+	$lastname = mysqli_real_escape_string($conn,$_POST["lastname"]);
+	$email = mysqli_real_escape_string($conn, $_POST["email"]);
+	$username = mysqli_real_escape_string($conn, $_POST["username"]);
+	$password = mysqli_real_escape_string($conn, $_POST["password"]);
+	// $date = $_POST["day"]."-".$_POST["month"]."-".$_POST["year"];
+	$gender = (isset($_POST["gender"])?$_POST["gender"]:'');
+	$faculty = (isset($_POST["faculty"])?$_POST["faculty"]:'');
+	
+	
+
+	//check if names are empty
+	if(empty($firstname) || empty($lastname) || empty($email) || empty($username) || empty($password) || empty($gender)) {
+		$_SESSION['msg'] = 'Please fill in all the input fields !';
+	}else{
+		//CHECK IF NAME ALPHABET ONLY
+		if(!preg_match("/^[a-zA-Z]*$/",$firstname) || !preg_match("/^[a-zA-Z]*$/",$lastname)){
+			$_SESSION['msg'] = 'Name should contain alphabets only !';
+		}
+		else{
+			//CHECK IF EMAIL FORMAT IS VALID OR NOT
+			if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
+				$_SESSION['msg'] = 'The email format is invalid !';
+			}
+			else{
+				//CHECK IF EMAIL ALREADY EXISTS OR NOT
+				$sql = "SELECT * FROM users WHERE email='$email'";
+				$result = mysqli_query($conn,$sql);
+				$resultCheck = mysqli_num_rows($result);
+				if($resultCheck > 0){
+					$_SESSION['msg'] = 'A user account for this email already exists !';
+				}
+				else{
+					//HASING PASSWORD
+					// $hashedPassword = password_hash($password,PASSWORD_DEFAULT);
+
+					//INSERT USER INTO DATABASE
+					$sql = "INSERT INTO student (first_name,last_name,email,username,password,gender,faculty_id) VALUES('$firstname','$lastname','$email','$username','$password','$gender','$faculty');";
+					mysqli_query($conn, $sql);
+					$_SESSION['success'] = 'Account creation successful.';
+					header("location: index.php");
+				}
+			}		
+		}
+	}
+}
+
+?>
+
 <html> 
 <head>
 	<link rel="stylesheet" href="css/signup.css">
 	<title>Sign Up</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="js/jquery.min.js"></script>
 </head>
 <body>
+	<div class="heading">
+ 		<p class="title"><a href="index.php">ONLINE EXAMINATION SYSTEM</a></p>
+ 	</div>
 	<div id="formm">
 		<div id="form-main">
 			<div class="form-heading">
 				<h2>Sign Up</h2>	
 			</div>
 
-			<!--ERROR PANEL-->
-			<?php if(isset($_GET['error'])) { ?>
-			<div class="error-panel">
-				<p class="error"><?php echo $_GET['error']; ?></p>
+			<?php if(isset($_SESSION['msg'])){ ?>
+			<div class="red-text">
+				<p>
+					<?php echo $_SESSION['msg']; unset($_SESSION['msg']);?>
+				</p>
 			</div>
 			<?php } ?>
 
 			<!--FORM PANEL-->
 			<div class="form-signup">
-				<form action="signup_check.php" method="post" >
+				<form action="" method="post" >
+					<!--NAME-->
 					<div class="name form-panel">		
-						<input id="form-fName" name="firstname" class="form-input form-input-halfwidth" type="text" placeholder="First Name" autocomplete="">
-						<input id="form-lName" name="lastname" class="form-input form-input-halfwidth" type="text" placeholder="Last Name" autocomplete="">
+						<input id="form-fName" name="firstname" class="form-input form-input-halfwidth" type="text" placeholder="First Name" value="<?php if(!empty($firstname)){echo $firstname;} ?>">
+						<input id="form-lName" name="lastname" class="form-input form-input-halfwidth" type="text" placeholder="Last Name" value="<?php if(!empty($lastname)){echo $lastname;} ?>">
 					</div>
+					<!--USERNAME -->
 					<div class="username form-panel">			
-						<input id="form-username" name="username" class="form-input" type="text" placeholder="Username" autocomplete="off">
+						<input id="form-username" name="username" class="form-input" type="text" placeholder="Username" autocomplete="off" value="<?php if(!empty($username)){echo $username;} ?>"><br>
+						<p id="check-username"></p>
 					</div>
+					<!--EMAIL  -->
 					<div class="email form-panel">			
-						<input id="form-email" name="email" class="form-input" type="text" placeholder="Email" autocomplete="off">
+						<input id="form-email" name="email" class="form-input" type="text" placeholder="Email" autocomplete="off" value="<?php if(!empty($email)){echo $email;} ?>">
 					</div>
-
+					<!--PASSWORD -->
 					<div class="password form-panel">
-						<input id="form-password" name="password" class="form-input form-input-fullwidth" type="password" placeholder="New password" onKeyUpx="checkPasswordStrength();">
+						<input id="form-password" name="password" class="form-input form-input-fullwidth" type="password" placeholder="New password" onKeyUpx="checkPasswordStrength();" >
 					</div>
-
+					<!--DATE -->
 					<div class="dates-panel">		
 						<span class="span-title">Date of Birth</span>	
 						<span class="date-month">
@@ -184,20 +246,18 @@ elseif(!isset($_SESSION['email'])){
 					</div>
 					
 					<div class="gender-panel">
-						<!-- <span class="title_gender">Gender</span> -->
-						<span id="form-gender" class="span-title">Gender</span>
 
+						<span id="form-gender" class="span-title">Gender</span>
 						<span class="gender">
-							<input class="form-input-radio" type="radio" name="gender" id="male" value="M">
+							<input class="form-input-radio" type="radio" name="gender" id="male" value="M" <?php if(!empty($gender)&&$gender=='M'){echo "checked='checked'";} ?>>
 							<label class="label-radio" for="male">Male</label>
 						</span>
 						<span class="gender">
-							<input class="form-input-radio"-radio type="radio" name="gender" id="female" value="F">
+							<input class="form-input-radio"-radio type="radio" name="gender" id="female" value="F" <?php if(!empty($gender)&&$gender=='F'){echo "checked='checked'";} ?>>
 							<label class="label-radio" for="female">Female</label>
-						</span>
-						
+						</span>						
 						<span class="gender">
-							<input class="form-input-radio" type="radio" name="gender" id="other" value="OTHER">
+							<input class="form-input-radio" type="radio" name="gender" id="other" value="OTHER" <?php if(!empty($gender)&&$gender=='OTHER'){echo "checked='checked'";} ?>>
 							<label class="label-radio" for="other">Other</label><br/>
 						</span>	
 					</div>
@@ -207,7 +267,7 @@ elseif(!isset($_SESSION['email'])){
 						<span class="span-title">Faculty</span>	
 						<span class="faculty">
 							<select id="form-faculty" name="faculty" id="faculty" class="selector">
-								<option value="" selected=1>Faculty</option>
+								<option value="">Faculty</option>
 								<?php  
 									include_once 'includes/db.inc.php';
 									$sql = "SELECT * FROM faculty;";
@@ -217,7 +277,9 @@ elseif(!isset($_SESSION['email'])){
 									if($queryCheck > 0){
 										foreach($query as $row){
 								?>
-								<option value="<?php echo $row['faculty_id']; ?>"><?php echo $row['faculty_name']; ?></option>
+								<option value="<?php echo $row['faculty_id']; ?>" <?php if(!empty($faculty)&&$faculty==$row['faculty_id']){echo "selected=1";} ?>>
+									<?php echo $row['faculty_name']; ?>
+								</option>
 								<?php 
 									}
 								}
@@ -234,18 +296,18 @@ elseif(!isset($_SESSION['email'])){
 			
 		</div>
 	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="js/jquery.min.js"></script>
 	<script>
 		$("document").ready(function(){
 			$("#form-username").keyup(function(){
-				var email = $(this).val();
+				var uname = $(this).val();
 				$.ajax({
 					url: 'check.php',
-					data: {'email': email},
+					data: {'username': uname},
 					dataType: 'text',
 					method: 'post',
 					success:function(data){
-						$('#message_username').html(data);
+						$('#check-username').html(data);
 					}
 				});
 			});
@@ -271,8 +333,10 @@ elseif(!isset($_SESSION['email'])){
             }
 		}
 	</script> -->
+	<div class="footer">
+		<p>
+			Name of Institute &copy 2021. All Rights Reserved. Created by ASD.
+		</p>
+	</div>
 </body>
 </html>
-<?php 
-}
-include('footer.php') ;?>

@@ -4,7 +4,7 @@
 	font-family: arial;
 }
 
-.container{
+.faculty-container{
 	margin: 50px 0;
 	display: flex;
 	flex-direction: row;
@@ -12,7 +12,7 @@
 	/*border:1px solid red;*/
 }
 
-.main{
+.faculty-wrapper{
 	display: flex;
 	flex-direction:column;
 	justify-content: space-between;
@@ -29,14 +29,6 @@
 	/*border:1px solid blue;*/
 	margin-bottom: auto;
 
-}
-.heading{
-	display: flex;
-	flex-direction: row;
-	justify-content :space-between;
-	font-weight:bold;
-	font-size: 1.5em;
-	margin-bottom: auto;
 }
 .faculty p{
 	text-decoration:underline;

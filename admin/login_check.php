@@ -1,6 +1,6 @@
 <?php 
 session_start();
-
+$_SESSION['temp_email'] ='';
 if(isset($_POST['submit'])){
 	include_once 'includes/db.inc.php';
 
@@ -11,15 +11,19 @@ if(isset($_POST['submit'])){
 	//ERROR HANDLERS
 	//CHECK IF INPUTS ARE EMPTY
 	if(empty($email) || empty($password)){
-		header("location: index.php?error=emptyFields");
+		$_SESSION['msg'] = 'Please enter email and password';
+		header("location: index.php");
 		exit();
 	}
 	else{
-		$sql = "SELECT * FROM admin WHERE  email='$email';";
+		$sql = "SELECT * FROM student WHERE  email='$email';";
 		$result = mysqli_query($conn, $sql);
 		$resultCheck = mysqli_num_rows($result);
 		if($resultCheck < 1){
-			header("location: index.php?error=loginError");
+			$_SESSION['temp_email'] = $email;
+			$_SESSION['msg'] = 'This email doesn\'t exist';
+			header("location: index.php");
+			// header("location: index.php?error=loginError");
 			exit();
 		}
 		else{
@@ -40,24 +44,31 @@ if(isset($_POST['submit'])){
 				// 	exit();
 				// }
 				if($password!=$row['password']){
-					header("location: login.php?error=passwordError");
+					$_SESSION['msg'] = 'incorrect password';
+					header("location: index.php");
+					// header("location: login.php?error=passwordError");
 					exit();
-				}elseif($password == $row['password']){
+				}elseif($password == $row['password'])
+				{
 					//LOGGING IN THE USER
+					unset($_SESSION['temp_email']);
 					$_SESSION['firstname'] = $row['first_name'];
 					$_SESSION['lastname'] = $row['last_name'];
 					$_SESSION['email'] = $row['email'];
 					header("location: dashboard.php");
-					exit();
 				}
 			}
 			else{
-				header("location: index.php?error=UsernameOrPasswordError");
+				$_SESSION['msg'] = 'incorrect password';
+				header("location: index.php");
+				// header("location: index.php?error=UsernameOrPasswordError");
 			}
 		}
 	}
 }
 else{
-	header("location: index.php?error=loginError");
+	$_SESSION['msg'] = 'login ERRRROR';
+	header("location: index.php");
+	// header("location: index.php?error=loginError");
 		exit();
 }

@@ -1,18 +1,18 @@
-d<?php 
+<?php 
 	require('includes/db.inc.php');
 
-	$email = $_POST['email'];
+	$username = $_POST['username'];
 
-	$sql = "select email from student where email ='$email' ";
+	$sql = "select username from student where username ='$username' ";
 	$result = mysqli_query($conn,$sql);
 
 	if(mysqli_num_rows($result)==1){
-		echo 'A user account for this email already exists';
+		echo 'Username has already been taken!';
 
 	}
 	else
 	{
-		echo 'email available';
+		echo 'Username available';
 	}
 
 	// $uppercase = preg_match('@[A-Z]@', $password);

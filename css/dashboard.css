@@ -24,10 +24,10 @@
 }
 
 .heading{
-	align-self:flex-start;
+	/*align-self:flex-start;
 	font-weight: bold;
 	font-size: 1.5em;
-	text-decoration: underline;
+	text-decoration: underline;*/
 	/*padding: 0 0 30px;*/
 }
 .counter-wrapper{

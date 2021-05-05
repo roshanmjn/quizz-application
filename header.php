@@ -11,6 +11,10 @@ if(isset($_SESSION['email'])){
 <html lang="en">
 <head>
 	<link rel="stylesheet" href="css/header.css" type="text/css">
+	<link rel="stylesheet" href="css/footer.css">
+	<link rel="stylesheet" href="css/question.css">
+	<link rel="stylesheet" href="css/student.css">			
+	<link rel="stylesheet" type="text/css" href="css/faculty.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
 	$(document).ready(function(){
@@ -46,10 +50,7 @@ if(isset($_SESSION['email'])){
 			</ul>
 			
 		</div>
-		
 	</div>
-</body>
-
 <?php }
 else{
 	header("location: login.php");

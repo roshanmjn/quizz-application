@@ -3,11 +3,11 @@
 	padding:0;
 }
 
-.container{
+.student-container{
 	margin: 50px 0;
 }
 
-.main{
+.student-wrapper{
 	display:flex;
 	flex-direction: column;
 	justify-content: space-around;
@@ -25,7 +25,6 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	/*align-self: flex-start;*/
 	font-weight:bold;
 	font-size: 1.5em;
 	margin-bottom: auto;
@@ -95,7 +94,7 @@
 
 	/*background: #86D2DE;*/
 }
-.form-heading{
+.form.student{
 	padding: 15px;
 	/*border: 1px solid red;*/
 	border-bottom: 1px solid gray;

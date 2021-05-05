@@ -1,5 +1,6 @@
 <?php
 include('header.php');
+define('siteurl',(isset($_SERVER['HOST'])&&$_SERVER['HOST']==='on')?"https":"http"."://".$_SERVER['HTTP_HOST'].'/'.$_SERVER['PHP_SELF']);
 ?>
 
 <!DOCTYPE html>
@@ -20,11 +21,12 @@ include('header.php');
 	</script>
 </head>
 <body>
+	<?php echo siteurl; ?>
 	<div class="dashboard">		
 		<div class="heading">Dashboard</div>
 		
 		<div class="counter-wrapper">
-			<div class="student counter">
+			<div class="counter">
 			<h3>Students</h3>
 				<?php 
 					$sql1 = "SELECT student_id FROM student";
@@ -34,7 +36,7 @@ include('header.php');
 				 ?>	
 			</div>
 
-			<div class="faculty counter">
+			<div class="counter">
 				<h3>Faculty</h3>
 				<?php 
 						$sql1 = "SELECT faculty_id FROM faculty";
@@ -44,7 +46,7 @@ include('header.php');
 				?>
 			</div>
 
-			<div class="question counter">
+			<div class="counter">
 				<h3>Question</h3>
 				<?php 
 					$sql1 = "SELECT question_id FROM question";
@@ -54,7 +56,7 @@ include('header.php');
 				?>
 			</div>
 
-			<div class="result counter">
+			<div class="counter">
 				<h3>Result</h3>
 				<?php 
 					$sql1 = "SELECT result_id FROM result";

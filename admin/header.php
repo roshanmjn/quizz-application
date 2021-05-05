@@ -10,7 +10,13 @@ if(isset($_SESSION['email'])){
 
 <html lang="en">
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="css/header.css" type="text/css">
+	<link rel="stylesheet" href="css/dashboard.css">
+	<link rel="stylesheet" href="css/footer.css">
+	<link rel="stylesheet" href="css/question.css">
+	<link rel="stylesheet" href="css/student.css">
+	<link rel="stylesheet" type="text/css" href="css/faculty.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
 	$(document).ready(function(){
@@ -37,7 +43,7 @@ if(isset($_SESSION['email'])){
 
 		<div class="dropdown-btn">
 			<ul>			
-					<li><span class="greetings"><?php  echo 'Hi, '.$_SESSION['firstname']; ?></span>
+					<li><span class="greetings"><?php  echo 'Hi, '.$_SESSION['name']; ?></span>
 					<div class="arrow"></div>
 					<ul class="dropdown-content visible hidden">
 						<li><a href="logout.php" >Logout</a></li>
@@ -46,11 +52,9 @@ if(isset($_SESSION['email'])){
 			</ul>
 			
 		</div>
-		
 	</div>
-</body>
-
 <?php }
 else{
-	header("location: login.php");
+	$_SESSION['msg'] = 'Please Log In first to access dashboard!';
+	header("location: index.php");
 } ?>

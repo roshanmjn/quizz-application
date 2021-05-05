@@ -5,7 +5,7 @@
 }
 
 /*.dashboard{
-	margin: 50px auto;	
+	margin: 5rem auto;	
 	height: 74%;
 	border: 1px solid red;
 }*/
@@ -14,39 +14,39 @@
 	display: flex;
   	flex-direction: column;
   	justify-content:space-around;
-	margin: 50px auto;
-	width: 800px;
-	height: 300px;	
-	padding: 30px;
+	margin: 5rem auto;
+	width: 80rem;
+	height: 30rem;	
+	padding: 3rem;
 	/*border: 1px solid orange;*/
-	box-shadow: 0px 2px 4px gray;
-	border-radius: 10px;
+	box-shadow: 0 .2rem .4rem gray;
+	border-radius: 1rem;
 }
 
-.heading{
+.dash-heading{
 	align-self:flex-start;
 	font-weight: bold;
-	font-size: 1.5em;
+	font-size: 2.4rem;
 	text-decoration: underline;
-	/*padding: 0 0 30px;*/
+	/*padding: 0 0 3rem;*/
 }
 .counter-wrapper{
 	/*border:1px solid red;*/
 	display:flex;
 	flex-direction: row;
 	justify-content: space-between;
-	height: 200px;
+	height: 20rem;
 	/*margin-bottom:auto;*/
 }
 .counter{
 	align-self:center;
-	padding: 20px;
-	width: 100px;
-	height: 100px;
+	padding: 2rem;
+	width: 10rem;
+	height: 10rem;
 	background: lightblue;
 	text-align: center;
 	border-radius:15px;
-	box-shadow: 2px 4px 4px gray;
+	box-shadow: .2rem .4rem .4rem gray;
 	cursor:pointer;
 }
 .counter:hover{
@@ -54,11 +54,19 @@
 	box-shadow: 2px 3px 3px gray;
 }
 .counter:nth-child(odd){
-	/*margin: 70px 30px 30px 0;*/
+	/*margin: 7rem 3rem 3rem 0;*/
+}
+.counter h3 {
+	font-size:2em;
 }
 .display{
 	display: inline-block;
 	text-decoration: none;
 	color:#000;
-	font-size:2em;
+	font-size:3em;
+}
+
+.red-text{
+	color:red;
+	font-weight: bold;
 }
