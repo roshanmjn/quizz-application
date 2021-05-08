@@ -1,3 +1,41 @@
+<<<<<<< HEAD
+<?php
+include('header.php');
+
+?>
+<script src="js/jquery.min.js"></script>
+<script>
+	//CLICK FUNCTION ON DIV
+	$(document).ready(function(){
+		$(".student").click(function(){
+			window.location = "student.php";
+		});
+		
+		
+	});
+</script>
+<div class="container">
+   <div class="welcome">
+   		<p>Hello <span class="user-text"><?php echo $_SESSION['firstname']; ?></span>. Welcome to Online Examination Portal.</p>
+   </div>
+   <div class="rules">
+   		<p>
+		    Here are some of the rules and regulations:<br />
+		    1. Once you successfully login, you can't log back in unless the permission of system administrator.<br />
+		    2. After you click on "Take a Test", the timer will start and it can't be paused or stopped.<br />
+		    3. All 10 answers must be checked before submitting.<br />
+		</p>
+
+   </div>
+
+   <div class="test-button">
+		<a href="question.php" class="btn btn-success">Take a test</a>
+		<p>-</p>
+		<a href="logout.php" class="btn btn-danger">Quit</a>
+	</div>
+</div>	
+
+=======
 <?php
 include('header.php');
 define('siteurl',(isset($_SERVER['HOST'])&&$_SERVER['HOST']==='on')?"https":"http"."://".$_SERVER['HTTP_HOST'].'/'.$_SERVER['PHP_SELF']);
@@ -71,4 +109,5 @@ define('siteurl',(isset($_SERVER['HOST'])&&$_SERVER['HOST']==='on')?"https":"htt
 	
 </body>
 </html>
+>>>>>>> 13a41eea598d165f1fcdab37f697917fa73bbe10
 <?php include('footer.php'); ?>

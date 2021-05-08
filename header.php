@@ -1,3 +1,43 @@
+<<<<<<< HEAD
+<?php 
+session_start(); 
+
+require('includes/db.inc.php');
+
+if(isset($_SESSION['email'])){
+?>
+
+<html lang="en">
+<head>
+	<link rel="stylesheet" href="css/header.css" type="text/css">
+	<link rel="stylesheet" href="css/footer.css">
+	<!-- <link rel="stylesheet" href="css/question.css"> -->
+	<!-- <link rel="stylesheet" href="css/student.css">		 -->
+	<link rel="stylesheet" href="css/dashboard.css">	
+	<link rel="stylesheet" href="css/question.css">	
+	<link rel="stylesheet" href="css/result.css">	
+	<!-- <link rel="stylesheet" type="text/css" href="css/faculty.css"> -->
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+		  $(".dropdown-btn").click(function(){
+		    $(".dropdown-content").toggleClass("hidden");
+		  });
+		});
+	</script>
+</head>
+<body>
+	<div class="header">
+		<p>
+			Online Examination Portal
+		</p>
+	</div>
+<?php }
+else{
+	$_SESSION['msg'] = "Please Log In first !";
+	header("location: index.php");
+=======
 <?php 
 session_start(); 
 require('includes/db.inc.php');
@@ -54,4 +94,5 @@ if(isset($_SESSION['email'])){
 <?php }
 else{
 	header("location: login.php");
+>>>>>>> 13a41eea598d165f1fcdab37f697917fa73bbe10
 } ?>
